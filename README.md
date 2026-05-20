@@ -1,80 +1,92 @@
-# Healthcare Data Workflow Demo
+# Healthcare Workflow MVP
 
-## Project Purpose
-This project is a lightweight proof-of-concept web app that demonstrates a mock healthcare data workflow:
-- Connect a mock patient
-- Capture patient consent
-- Display mock healthcare data
-- View audit log events
-- Compare encounter context data
+## Project Overview
+Healthcare Workflow MVP is a React + TypeScript demo application that simulates a patient data workflow across five screens: Connect, Consent, Data Display, Audit Log, and Encounter Context Comparison.
 
-This is a demo workflow and not a production healthcare system.
+## Purpose of the Demo
+This project demonstrates workflow behavior, UI flow, and mock data interactions for a healthcare-style experience without using real patient systems or external APIs.
 
 ## Tech Stack
-- React + TypeScript
+- React 18
+- TypeScript
+- Vite
 - React Router
-- Local mock API service layer (`src/mock/api/mockApiService.ts`)
-- Local mock data and JSON fixtures (`src/mock/data`, `src/mock/json`)
-- Plain CSS (`src/styles/app.css`)
+- ESLint
+- Local in-memory mock API + fixture data
 
-## How To Run Locally
-Prerequisites:
-- Node.js 18+ and npm
+## Architecture Summary
+- Route-based page architecture (`/`, `/consent`, `/data`, `/audit`, `/compare`)
+- Feature-oriented UI components under `src/features`
+- Shared UI primitives under `src/shared/ui`
+- In-memory mock service layer in `src/mock/api/mockApiService.ts`
+- Strong typing through `src/types`
 
-Current repository status:
-- The source code is present, but project runtime files like `package.json` are not yet in this workspace.
+## Folder Structure
+```text
+.
+├─ docs/                     # Product and technical specs
+├─ src/
+│  ├─ app/                   # App shell, routes, layout
+│  ├─ pages/                 # Screen-level pages
+│  ├─ features/              # Screen-specific UI components
+│  ├─ shared/ui/             # Reusable UI components
+│  ├─ mock/
+│  │  ├─ api/                # Mock API service layer
+│  │  ├─ data/               # Typed mock fixtures
+│  │  └─ json/               # JSON fixtures
+│  ├─ styles/                # Global CSS
+│  └─ types/                 # Domain and API types
+├─ index.html
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
+```
 
-When project scripts are available, run:
-1. `npm install`
-2. `npm run lint`
-3. `npm run typecheck`
-4. `npm run build`
-5. `npm run dev`
+## Setup Instructions
+1. Install dependencies:
+   - `npm install`
+2. Start development server:
+   - `npm run dev`
+3. Open the Vite local URL shown in terminal (commonly `http://localhost:5173`).
 
-Then open the local dev URL shown in terminal (commonly `http://localhost:5173` or similar).
-
-## MVP Screens
-The intended MVP flow is:
-1. Connect (`/`)
-2. Consent (`/consent`)
-3. Data Display (`/data`)
-4. Audit Log (`/audit`)
-5. Encounter Context Comparison (`/compare`)
-
-Each screen includes clear back/next navigation following this sequence.
+## Available Scripts
+- `npm run dev` - Start Vite development server
+- `npm run build` - Type-check and build production bundle
+- `npm run preview` - Preview production build locally
+- `npm run lint` - Run ESLint
+- `npm run typecheck` - Run TypeScript type checks
 
 ## Mock API Explanation
-The app uses an in-memory mock API service (`src/mock/api/mockApiService.ts`) instead of a network backend.
+The app uses a local in-memory service instead of network calls:
+- Entry point: `src/mock/api/mockApiService.ts`
+- Source fixtures: `src/mock/data` and `src/mock/json`
+- Supports operations such as:
+  - patient connect simulation
+  - consent read/update
+  - healthcare data retrieval
+  - audit log retrieval
+  - encounter comparison retrieval
 
-Key points:
-- Data source is local fixtures from `src/mock/data`.
-- State is cloned into an in-memory store when the app loads.
-- Screen actions update in-memory state (for example, consent submission).
-- Audit entries are appended in-memory for user actions (for example, connect and submit consent).
-- No authentication or external API calls are performed.
+The service mutates local in-memory state to simulate workflow behavior (for example, consent updates and audit events).
 
-Primary mock service functions include:
-- `getPatient()`
-- `getConsentStatus()`
-- `submitConsent()`
-- `getHealthcareData()`
-- `getAuditLogs()`
-- `getEncounterComparison()`
+## Workflow Overview
+Primary MVP sequence:
+1. Connect mock patient
+2. Review and grant consent
+3. View consent-gated healthcare data
+4. Review audit log events
+5. Compare two encounters with difference and completeness notes
 
-## Intentionally Excluded
-- Real healthcare/EHR API integrations
-- Authentication and authorization
-- Claims processing
-- Payments
-- Production security/compliance hardening
+## Intentionally Excluded Production Features
+- Real EHR/healthcare API integration
+- Authentication/authorization
 - Persistent database storage
-- Advanced error recovery and retry systems
+- Production-grade security/compliance controls
+- Claims, billing, or payment workflows
+- Advanced observability and resiliency controls
 
-## Future Real API Replacement Notes
-To replace mocks with real APIs later:
-1. Keep screen components calling a service layer instead of direct data access.
-2. Replace `mockApiService` methods with real HTTP clients while preserving method signatures.
-3. Move from in-memory state to backend persistence.
-4. Add auth and consent enforcement at API and route-guard levels.
-5. Add environment-based API configuration and request error handling.
-6. Keep mock data/service available for local development and UI testing.
+## Future Extensibility Notes
+- Replace mock service functions with real API clients while preserving interfaces
+- Add auth and permission enforcement at route and API boundaries
+- Introduce persistent backend state and environment-based configuration
+- Expand validation, error handling, and end-to-end automated tests

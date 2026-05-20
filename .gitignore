@@ -10,3 +10,6 @@ pnpm-debug.log*
 .env.*
 !.env.example
 .vscode
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
