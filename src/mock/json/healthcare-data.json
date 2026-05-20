@@ -1,0 +1,65 @@
+[
+  {
+    "patientId": "patient-1",
+    "demographics": {
+      "address": "123 Demo Street",
+      "phone": "+1-555-0100",
+      "email": "alex.rivera@example.com"
+    },
+    "encounters": [
+      {
+        "id": "enc-1",
+        "patientId": "patient-1",
+        "date": "2026-04-20",
+        "provider": "Dr. Taylor",
+        "type": "outpatient",
+        "status": "completed",
+        "diagnosis": ["Hypertension"],
+        "notes": "Follow-up visit",
+        "context": {
+          "location": "Clinic A",
+          "chiefComplaint": "Headache",
+          "assessment": "Mild hypertension",
+          "plan": "Continue current medication"
+        }
+      },
+      {
+        "id": "enc-2",
+        "patientId": "patient-1",
+        "date": "2026-05-10",
+        "provider": "Dr. Morgan",
+        "type": "outpatient",
+        "status": "completed",
+        "diagnosis": ["Hypertension"],
+        "notes": "Routine check",
+        "context": {
+          "location": "Clinic B",
+          "chiefComplaint": "Routine blood pressure check",
+          "assessment": "Condition stable",
+          "plan": "Monitor and follow up in 3 months"
+        }
+      }
+    ],
+    "medications": [
+      {
+        "name": "Lisinopril",
+        "dose": "10mg",
+        "frequency": "Once daily"
+      }
+    ],
+    "labResults": [
+      {
+        "testName": "HbA1c",
+        "value": "5.8",
+        "unit": "%",
+        "date": "2026-05-01"
+      }
+    ],
+    "dataCompleteness": {
+      "demographics": "complete",
+      "encounters": "complete",
+      "medications": "complete",
+      "labResults": "partial"
+    }
+  }
+]

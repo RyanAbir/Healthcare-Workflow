@@ -1,0 +1,13 @@
+import type { Consent } from "../../types/entities";
+
+export const consentsMock: Consent[] = [
+  {
+    id: "consent-1",
+    patientId: "patient-1",
+    status: "pending",
+    requestedAt: "2026-05-20T08:00:00.000Z",
+    respondedAt: null,
+    scope: ["demographics", "encounters", "medications", "labResults"],
+    notes: "Initial consent request",
+  },
+];
